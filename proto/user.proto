@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "./";
+
+message RegisterReq {
+  string name = 1;
+  string password = 2;
+}
+
+message RegisterResp {
+  string msg = 1;
+  int32 code = 2;
+}
+message LoginReq {
+  string name = 1;
+  string password = 2;
+}
+
+message LoginResp {
+  string msg = 1;
+  int32 code = 2;
+
+}
+message MiaoListReq {
+  int32 id = 2;
+  repeated MiaoList list = 1;
+}
+message MiaoList{
+  string goodsName = 1;
+  string goodsNum = 2;
+}
+message MiaoListResp {
+  string msg = 1;
+  int32 code = 2;
+  string date = 3;
+}
+message GoodsAddReq {
+  string name = 1;
+  fixed32 price = 2;
+  int32 num = 3;
+}
+
+message GoodsAddResp {
+  string msg = 1;
+  int32 code = 2;
+}
+message OrderAddsReq {
+  string name = 1;
+  string orderSn = 2;
+  int32 num = 3;
+}
+
+message OrderAddsResp {
+  string msg = 1;
+  int32 code = 2;
+}
+message OrderListReq {
+  int32 id = 1;
+  repeated OrderList list = 2;
+}
+message OrderList {
+  string name = 1;
+  string orderSn = 2;
+  int32 num = 3;
+}
+
+message OrderListResp {
+  string msg = 1;
+  int32 code = 2;
+  string Date = 3;
+}
+message OrderAddReq {
+  int64 UserID = 1;
+  repeated OrderItem List = 4;
+}
+
+message OrderItem {
+  int64 goodsId = 1;
+  int64 quantity = 2;
+}
+
+message OrderAddResp {
+  string orderSn = 1;
+  float total = 2;
+  string payUrl = 3;
+}
+
+message NotifyPayReq {
+
+}
+message NotifyPayResp {
+
+}
+service StreamGreeter {
+  rpc Register(RegisterReq) returns (RegisterResp);
+  rpc Login(LoginReq) returns (LoginResp);
+  rpc MiaoList(MiaoListReq) returns (MiaoListResp);
+  rpc GoodsAdd(GoodsAddReq) returns (GoodsAddResp);
+  rpc OrderAdd(OrderAddReq) returns (OrderAddResp);
+  rpc OrderAdds(OrderAddsReq) returns (OrderAddsResp);
+  rpc OrderList(OrderListReq) returns (OrderListResp);
+  rpc NotifyPay(NotifyPayReq) returns (NotifyPayResp);
+}
+
+
